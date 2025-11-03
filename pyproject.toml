@@ -8,4 +8,5 @@ dependencies = [
     "langchain>=1.0.3",
     "langchain-community>=0.4.1",
     "langchain-google-genai>=3.0.0",
+    "pyprojroot>=0.3.0",
 ]

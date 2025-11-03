@@ -6,10 +6,24 @@ from langchain.agents import create_agent
 from langchain_google_genai.chat_models import ChatGoogleGenerativeAI
 from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage
+from pyprojroot import here
 load_dotenv()
+db_path = here("Chinook.db").resolve()
+db_uri = f"sqlite:///{db_path.as_posix()}"
+
+print("Using DB file:", db_path)
+print("DB exists?", db_path.exists())
+print("Using DB URI:", db_uri)
 
 llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
-db = SQLDatabase.from_uri("sqlite:///Chinook.db")
+try:
+    db = SQLDatabase.from_uri(db_uri)
+    print(db.get_usable_table_names())
+except Exception as e:
+    # Print a clearer error to help debugging connection/URI issues
+    print("Failed to open DB at", db_path)
+    print("Exception:", repr(e))
+    raise
 
 @dataclass
 class RuntimeContext:
