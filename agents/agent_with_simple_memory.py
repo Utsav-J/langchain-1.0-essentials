@@ -77,7 +77,7 @@ while question != "exit":
 
 '''
 $ uv run agents/agent_with_simple_memory.py 
-Using DB file: E:\Python Stuff\langchain-1.0-samples\Chinook.db
+Using DB file: E:\\Python Stuff\\langchain-1.0-samples\\Chinook.db
 DB exists? True
 Using DB URI: sqlite:///E:/Python Stuff/langchain-1.0-samples/Chinook.db
 ['Album', 'Artist', 'Customer', 'Employee', 'Genre', 'Invoice', 'InvoiceLine', 'MediaType', 'Playlist', 'PlaylistTrack', 'Track']
