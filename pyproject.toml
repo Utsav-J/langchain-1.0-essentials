@@ -1,0 +1,11 @@
+[project]
+name = "langchain-1-0-samples"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "langchain>=1.0.3",
+    "langchain-community>=0.4.1",
+    "langchain-google-genai>=3.0.0",
+]
