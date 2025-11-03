@@ -36,7 +36,7 @@ def execute_SQL(sql_query:str):
     db = runtime.context.db
 
     try:
-        db.run(sql_query)
+        return db.run(sql_query)
     except Exception as e:
         return f"Error: {e}"
 

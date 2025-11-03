@@ -6,6 +6,8 @@ from langchain.agents import create_agent
 from langchain_google_genai.chat_models import ChatGoogleGenerativeAI
 from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage
+from langgraph.config import get_stream_writer
+from time import sleep
 load_dotenv()
 
 llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
@@ -13,7 +15,11 @@ llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 @tool
 def check_haiku(text:str):
     """Given a candidate, the function checks if there are exactly three lines, thus making it a haiku"""
-    lines =    [line.strip() for line in text.strip().splitlines() if line.strip()]
+    writer = get_stream_writer()
+    writer("hmm thats a nice haiku")
+    sleep(1)
+    writer("or is it")
+    lines = [line.strip() for line in text.strip().splitlines() if line.strip()]
     print(f"checking haiku, it has {len(lines)} lines:\n {text}")
 
     if len(lines) != 3:
@@ -30,11 +36,11 @@ agent = create_agent(
 
 
 question = "What worries you?"
-for step in agent.stream(
+for chunk in agent.stream(
     {"messages": HumanMessage(question)}, # type: ignore
-    stream_mode="values"
+    stream_mode=["values","custom"]
 ):
-    step['messages'][-1].pretty_print()
+    print(chunk)
 
 '''
 ================================ Human Message =================================
